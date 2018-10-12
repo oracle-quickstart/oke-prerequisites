@@ -46,23 +46,26 @@ We can check out our new cluster in the console by navigating [here](https://con
 ![](./images/05%20-%20console.png)
 
 ## Setup the Terminal
-To interact with our cluster, we need to configure `kubectl` on our local machine.  To do that, first install the latest version with the commands:
+To interact with our cluster, we need `kubectl` on our local machine.  Instructions for that are [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  I'm a big fan of easy and on a mac, so I just ran:
 
-    version=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-    curl -LO https://storage.googleapis.com/kubernetes-release/release/${version}/bin/linux/amd64/kubectl
-    chmod +x ./kubectl
-    sudo mv ./kubectl /usr/local/bin/kubectl
-    mkdir -p $HOME/.kube
-    cp $KUBE_CONFIG_FILE_PATH ~/.kube/config
+    brew install kubectl
 
-We're also probably going to want `helm`.  We can do that by running the commands:
+That gave me this:
 
-    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
-    chmod 700 get_helm.sh
-    ./get_helm.sh
-    helm init
-    helm init --upgrade
-    helm repo update
+![](./images/06%20-%20brew%20install%20kubectl.png)
+
+We're also probably going to want `helm`.  Once again, brew is our friend.  Those on other platforms could take a look [here](https://github.com/helm/helm).
+
+    brew install kubernetes-helm
+
+That gave me this:
+
+![](./images/07%20-%20brew%20install%20helm.png)
+
+The terraform apply dumped a kubernetes config file called config.  By default, `kubectl` expects the config file to be in `~/.kube/config`.  So, we can put it there by running:
+
+    mkdir ~/.kube
+    mv config ~/.kube
 
 We can make sure this all worked by running this command to check out the pods in our cluster:
 
@@ -70,7 +73,7 @@ We can make sure this all worked by running this command to check out the pods i
 
 That should give something like:
 
-![](./images/06%20-%20get%20pods.png)
+![](./images/08%20-%20kubectl.png)
 
 ## Destroy the Deployment
 When you no longer need the DSE cluster, you can run this to delete the deployment:
@@ -79,4 +82,4 @@ When you no longer need the DSE cluster, you can run this to delete the deployme
 
 You'll need to enter `yes` when prompted.  Once complete, you'll see something like this:
 
-![](./images/13%20-%20terraform%20destroy.png)
+![](./images/09%20-%20terraform%20destroy.png)

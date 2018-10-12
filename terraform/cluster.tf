@@ -6,7 +6,7 @@ data "oci_containerengine_cluster_kube_config" "cluster_kube_config" {
 
 resource "local_file" "cluster_kube_config_file" {
   content  = "${data.oci_containerengine_cluster_kube_config.cluster_kube_config.content}"
-  filename = "kube_config_file.txt"
+  filename = "config"
 }
 
 resource "oci_containerengine_cluster" "cluster" {

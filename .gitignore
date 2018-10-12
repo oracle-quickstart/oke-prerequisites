@@ -3,4 +3,5 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform.tfstate.lock.info
 
-kube_config_file.txt
+# kubectl config file output by Terraform 
+config
