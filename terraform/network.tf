@@ -3,7 +3,7 @@ variable "VPC-CIDR" {
 }
 
 resource "oci_core_virtual_network" "oke_confluent_vcn" {
-  cidr_block     = "${var.VPC-CIDR}"
+  destination    = "${var.VPC-CIDR}"
   compartment_id = "${var.tenancy_ocid}"
   display_name   = "oke_confluent_vcn"
   dns_label      = "okecfvcn"
@@ -21,7 +21,7 @@ resource "oci_core_route_table" "RouteForComplete" {
   display_name   = "RouteTableForComplete"
 
   route_rules {
-    cidr_block        = "0.0.0.0/0"
+    destination       = "0.0.0.0/0"
     network_entity_id = "${oci_core_internet_gateway.confluent_internet_gateway.id}"
   }
 }
@@ -175,7 +175,7 @@ resource "oci_core_security_list" "LoadBalancers" {
 resource "oci_core_subnet" "public" {
   count               = "3"
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[count.index],"name")}"
-  cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, count.index)}"
+  destination         = "${cidrsubnet(var.VPC-CIDR, 8, count.index)}"
   display_name        = "public_${count.index}"
   compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
@@ -188,7 +188,7 @@ resource "oci_core_subnet" "public" {
 ## LB for Kubernetes
 resource "oci_core_subnet" "lb_subnet_1" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[0],"name")}"
-  cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, 20)}"
+  destination         = "${cidrsubnet(var.VPC-CIDR, 8, 20)}"
   display_name        = "lb_subnet_1"
   compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
@@ -201,7 +201,7 @@ resource "oci_core_subnet" "lb_subnet_1" {
 ## LB for Kubernetes
 resource "oci_core_subnet" "lb_subnet_2" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[1],"name")}"
-  cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, 21)}"
+  destination         = "${cidrsubnet(var.VPC-CIDR, 8, 21)}"
   display_name        = "lb_subnet_2"
   compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
