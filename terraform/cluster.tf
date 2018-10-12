@@ -2,6 +2,10 @@ variable "cluster_kubernetes_version" {
   default = "v1.9.7"
 }
 
+variable "node_pool_kubernetes_version" {
+  default = "v1.9.7"
+}
+
 variable "cluster_name" {
   default = "confluentOKECluster"
 }
@@ -34,10 +38,6 @@ variable "node_pool_initial_node_labels_value" {
   default = "value"
 }
 
-variable "node_pool_kubernetes_version" {
-  default = "v1.9.7"
-}
-
 variable "node_pool_name" {
   default = "cfPool"
 }
@@ -47,11 +47,11 @@ variable "node_pool_node_image_name" {
 }
 
 variable "node_pool_node_shape" {
-  default = "VM.Standard1.1"
+  default = "${var.node_pool.shape}"
 }
 
 variable "node_pool_quantity_per_subnet" {
-  default = 3
+  default = "${var.node_pool.nodes}"
 }
 
 resource "oci_containerengine_cluster" "cf_cluster" {

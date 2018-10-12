@@ -14,3 +14,16 @@ variable "region" {}
 # Key used to SSH to OCI VMs
 variable "ssh_public_key" {}
 variable "ssh_private_key" {}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Optional variables
+# The defaults here will give you a cluster.  You can also modify these.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "node_pool" {
+  type = "map"
+  default = {
+    shape = "VM.Standard1.1"
+    nodes = 3
+  }
+}
