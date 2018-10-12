@@ -74,7 +74,7 @@ That should give something like:
 ![](./images/08%20-%20get%20nodes.png)
 
 ## Destroy the Deployment
-When you no longer need the DSE cluster, you can run this to delete the deployment:
+When you no longer need the OKE cluster, you can run this to delete the deployment:
 
     terraform destroy
 
