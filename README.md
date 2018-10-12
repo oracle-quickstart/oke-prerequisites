@@ -48,7 +48,7 @@ Similarly, the IaaS machines running the cluster are viewable [here](https://con
 ![](./images/06%20-%20console%20iaas.png)
 
 ## Setup the Terminal
-To interact with our cluster, we need `kubectl` on our local machine.  Instructions for that are [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  I'm a big fan of easy and on a mac, so I just ran:
+To interact with our cluster, we need `kubectl` on our local machine.  Instructions for that are [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  I'm a big fan of easy and on a Mac, so I just ran:
 
     brew install kubectl
 
@@ -56,7 +56,7 @@ That gave me this:
 
 ![](./images/07%20-%20brew%20install%20kubectl.png)
 
-We're also probably going to want `helm`.  Once again, brew is our friend.  Those on other platforms could take a look [here](https://github.com/helm/helm).
+We're also probably going to want `helm`.  Once again, brew is our friend.  If you're on another platform, take a look [here](https://github.com/helm/helm).
 
     brew install kubernetes-helm
 
