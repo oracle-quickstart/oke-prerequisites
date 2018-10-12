@@ -54,22 +54,15 @@ variable "node_pool_quantity_per_subnet" {
   default = 3
 }
 
-variable "node_pool_ssh_public_key" {}
-
 resource "oci_containerengine_cluster" "cf_cluster" {
-  #Required
   compartment_id     = "${var.tenancy_ocid}"
   kubernetes_version = "${var.cluster_kubernetes_version}"
   name               = "${var.cluster_name}"
   vcn_id             = "${oci_core_virtual_network.oke_confluent_vcn.id}"
 
-  #Optional
   options {
     service_lb_subnet_ids = ["${oci_core_subnet.lb_subnet_1.id}", "${oci_core_subnet.lb_subnet_2.id}"]
-
-    #Optional
     add_ons {
-      #Optional
       is_kubernetes_dashboard_enabled = "${var.cluster_options_add_ons_is_kubernetes_dashboard_enabled}"
       is_tiller_enabled               = "${var.cluster_options_add_ons_is_tiller_enabled}"
     }
@@ -96,7 +89,7 @@ resource "oci_containerengine_node_pool" "cf_node_pool" {
   }
 
   quantity_per_subnet = "${var.node_pool_quantity_per_subnet}"
-  ssh_public_key      = "${var.node_pool_ssh_public_key}"
+  ssh_public_key      = "${var.ssh_public_key}"
 }
 
 output "cluster" {
