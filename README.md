@@ -39,7 +39,7 @@ You'll need to enter `yes` when prompted.  The apply should take about five minu
 ![](./images/04%20-%20terraform%20apply.png)
 
 ## Viewing the Cluster in the Console
-We can check out our new cluster in the console by navigating [here](https://console.us-phoenix-1.oraclecloud.com/containers/clusters)
+We can check out our new cluster in the console by navigating [here](https://console.us-phoenix-1.oraclecloud.com/containers/clusters).
 
 ![](./images/05%20-%20console%20cluster.png)
 
