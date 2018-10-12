@@ -65,13 +65,13 @@ The terraform apply dumped a kubernetes config file called config.  By default, 
     mkdir ~/.kube
     mv config ~/.kube
 
-We can make sure this all worked by running this command to check out the pods in our cluster:
+We can make sure this all worked by running this command to check out the nodes in our cluster:
 
-    kubectl get pods
+    kubectl get nodes
 
 That should give something like:
 
-![](./images/08%20-%20kubectl.png)
+![](./images/08%20-%20get%20nodes.png)
 
 ## Destroy the Deployment
 When you no longer need the DSE cluster, you can run this to delete the deployment:
