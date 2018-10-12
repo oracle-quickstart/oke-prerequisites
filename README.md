@@ -40,6 +40,38 @@ You'll need to enter `yes` when prompted.  The apply should take about five minu
 
 ![](./images/04%20-%20terraform%20apply.png)
 
+## Viewing the Cluster in the Console
+We can check out our new cluster in the console by navigating [here](https://console.us-phoenix-1.oraclecloud.com/a/compute/instances).  These are the IaaS machines running the OKE cluster.
+
+![](./images/05%20-%20console.png)
+
+## Setup the Terminal
+To interact with our cluster, we need to configure `kubectl` on our local machine.  To do that, first install the latest version with the commands:
+
+    version=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/${version}/bin/linux/amd64/kubectl
+    chmod +x ./kubectl
+    sudo mv ./kubectl /usr/local/bin/kubectl
+    mkdir -p $HOME/.kube
+    cp $KUBE_CONFIG_FILE_PATH ~/.kube/config
+
+We're also probably going to want `helm`.  We can do that by running the commands:
+
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+    helm init
+    helm init --upgrade
+    helm repo update
+
+We can make sure this all worked by running this command to check out the pods in our cluster:
+
+    kubectl get pods
+
+That should give something like:
+
+![](./images/06%20-%20get%20pods.png)
+
 ## Destroy the Deployment
 When you no longer need the DSE cluster, you can run this to delete the deployment:
 

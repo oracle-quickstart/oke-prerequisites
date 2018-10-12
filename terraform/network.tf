@@ -2,6 +2,10 @@ variable "VPC-CIDR" {
   default = "10.0.0.0/16"
 }
 
+data "oci_identity_availability_domains" "ADs" {
+  compartment_id = "${var.tenancy_ocid}"
+}
+
 resource "oci_core_virtual_network" "oke_confluent_vcn" {
   cidr_block     = "${var.VPC-CIDR}"
   compartment_id = "${var.tenancy_ocid}"
