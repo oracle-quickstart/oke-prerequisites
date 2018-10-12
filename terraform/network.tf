@@ -4,7 +4,7 @@ data "oci_identity_availability_domains" "availability_domains" {
 
 resource "oci_core_virtual_network" "virtual_network" {
   display_name   = "vcn"
-  cidr_block     = "${var.VPC-CIDR}"
+  cidr_block     = "10.0.0.0/16"
   compartment_id = "${var.tenancy_ocid}"
   dns_label      = "oke"
 }
