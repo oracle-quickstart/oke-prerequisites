@@ -39,9 +39,13 @@ You'll need to enter `yes` when prompted.  The apply should take about five minu
 ![](./images/04%20-%20terraform%20apply.png)
 
 ## Viewing the Cluster in the Console
-We can check out our new cluster in the console by navigating [here](https://console.us-phoenix-1.oraclecloud.com/a/compute/instances).  These are the IaaS machines running the OKE cluster.
+We can check out our new cluster in the console by navigating [here](https://console.us-phoenix-1.oraclecloud.com/containers/clusters)
 
-![](./images/05%20-%20console.png)
+![](./images/05%20-%20console%20cluster.png)
+
+Similarly, the IaaS machines running the cluster are viewable [here](https://console.us-phoenix-1.oraclecloud.com/a/compute/instances).
+
+![](./images/06%20-%20console%20iaas.png)
 
 ## Setup the Terminal
 To interact with our cluster, we need `kubectl` on our local machine.  Instructions for that are [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/).  I'm a big fan of easy and on a mac, so I just ran:
@@ -50,7 +54,7 @@ To interact with our cluster, we need `kubectl` on our local machine.  Instructi
 
 That gave me this:
 
-![](./images/06%20-%20brew%20install%20kubectl.png)
+![](./images/07%20-%20brew%20install%20kubectl.png)
 
 We're also probably going to want `helm`.  Once again, brew is our friend.  Those on other platforms could take a look [here](https://github.com/helm/helm).
 
@@ -58,7 +62,7 @@ We're also probably going to want `helm`.  Once again, brew is our friend.  Thos
 
 That gave me this:
 
-![](./images/07%20-%20brew%20install%20helm.png)
+![](./images/08%20-%20brew%20install%20helm.png)
 
 The terraform apply dumped a kubernetes config file called config.  By default, `kubectl` expects the config file to be in `~/.kube/config`.  So, we can put it there by running:
 
@@ -71,7 +75,7 @@ We can make sure this all worked by running this command to check out the nodes 
 
 That should give something like:
 
-![](./images/08%20-%20get%20nodes.png)
+![](./images/09%20-%20get%20nodes.png)
 
 ## Destroy the Deployment
 When you no longer need the OKE cluster, you can run this to delete the deployment:
@@ -80,4 +84,4 @@ When you no longer need the OKE cluster, you can run this to delete the deployme
 
 You'll need to enter `yes` when prompted.  Once complete, you'll see something like this:
 
-![](./images/09%20-%20terraform%20destroy.png)
+![](./images/10%20-%20terraform%20destroy.png)
