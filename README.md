@@ -7,8 +7,8 @@ First off you'll need to do some pre deploy setup.  That's all detailed [here](h
 ## Clone the Module
 Now, you'll want a local copy of this repo.  You can make that with the commands:
 
-    git clone https://github.com/cloud-partners/oke-howto.git
-    cd oke-howto/terraform
+    git clone https://github.com/cloud-partners/oke-how-to.git
+    cd oke-how-to/terraform
     ls
 
 ![](./images/01%20-%20git%20clone.png)
