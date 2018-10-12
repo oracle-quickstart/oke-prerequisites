@@ -3,7 +3,7 @@ variable "VPC-CIDR" {
 }
 
 resource "oci_core_virtual_network" "oke_confluent_vcn" {
-  destination    = "${var.VPC-CIDR}"
+  cidr_block     = "${var.VPC-CIDR}"
   compartment_id = "${var.tenancy_ocid}"
   display_name   = "oke_confluent_vcn"
   dns_label      = "okecfvcn"
@@ -61,7 +61,6 @@ resource "oci_core_security_list" "default_security_list" {
     stateless   = true
   }]
 
-  /* .. */
   ingress_security_rules = [{
     protocol  = "all"
     source    = "${cidrsubnet(var.VPC-CIDR, 8, 0)}"
@@ -175,7 +174,7 @@ resource "oci_core_security_list" "LoadBalancers" {
 resource "oci_core_subnet" "public" {
   count               = "3"
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[count.index],"name")}"
-  destination         = "${cidrsubnet(var.VPC-CIDR, 8, count.index)}"
+  cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, count.index)}"
   display_name        = "public_${count.index}"
   compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
@@ -188,7 +187,7 @@ resource "oci_core_subnet" "public" {
 ## LB for Kubernetes
 resource "oci_core_subnet" "lb_subnet_1" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[0],"name")}"
-  destination         = "${cidrsubnet(var.VPC-CIDR, 8, 20)}"
+  cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, 20)}"
   display_name        = "lb_subnet_1"
   compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
@@ -201,7 +200,7 @@ resource "oci_core_subnet" "lb_subnet_1" {
 ## LB for Kubernetes
 resource "oci_core_subnet" "lb_subnet_2" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[1],"name")}"
-  destination         = "${cidrsubnet(var.VPC-CIDR, 8, 21)}"
+  cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, 21)}"
   display_name        = "lb_subnet_2"
   compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
