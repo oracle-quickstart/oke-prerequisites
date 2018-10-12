@@ -1,5 +1,3 @@
-# This doesn't work yet.  Sorry.
-
 # oke-howto
 These are instructions on how to setup an Oracle Kubernetes Engine (OKE) cluster along with a Terraform module to automate part of that process.
 
