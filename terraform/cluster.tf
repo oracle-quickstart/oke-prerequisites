@@ -58,7 +58,7 @@ variable "node_pool_ssh_public_key" {}
 
 resource "oci_containerengine_cluster" "cf_cluster" {
   #Required
-  compartment_id     = "${var.compartment_ocid}"
+  compartment_id     = "${var.tenancy_ocid}"
   kubernetes_version = "${var.cluster_kubernetes_version}"
   name               = "${var.cluster_name}"
   vcn_id             = "${oci_core_virtual_network.oke_confluent_vcn.id}"
@@ -83,7 +83,7 @@ resource "oci_containerengine_cluster" "cf_cluster" {
 
 resource "oci_containerengine_node_pool" "cf_node_pool" {
   cluster_id         = "${oci_containerengine_cluster.cf_cluster.id}"
-  compartment_id     = "${var.compartment_ocid}"
+  compartment_id     = "${var.tenancy_ocid}"
   kubernetes_version = "${var.node_pool_kubernetes_version}"
   name               = "${var.node_pool_name}"
   node_image_name    = "${var.node_pool_node_image_name}"

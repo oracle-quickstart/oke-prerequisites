@@ -4,19 +4,19 @@ variable "VPC-CIDR" {
 
 resource "oci_core_virtual_network" "oke_confluent_vcn" {
   cidr_block     = "${var.VPC-CIDR}"
-  compartment_id = "${var.compartment_ocid}"
+  compartment_id = "${var.tenancy_ocid}"
   display_name   = "oke_confluent_vcn"
   dns_label      = "okecfvcn"
 }
 
 resource "oci_core_internet_gateway" "confluent_internet_gateway" {
-  compartment_id = "${var.compartment_ocid}"
+  compartment_id = "${var.tenancy_ocid}"
   display_name   = "confluent_internet_gateway"
   vcn_id         = "${oci_core_virtual_network.oke_confluent_vcn.id}"
 }
 
 resource "oci_core_route_table" "RouteForComplete" {
-  compartment_id = "${var.compartment_ocid}"
+  compartment_id = "${var.tenancy_ocid}"
   vcn_id         = "${oci_core_virtual_network.oke_confluent_vcn.id}"
   display_name   = "RouteTableForComplete"
 
@@ -27,7 +27,7 @@ resource "oci_core_route_table" "RouteForComplete" {
 }
 
 resource "oci_core_security_list" "default_security_list" {
-  compartment_id = "${var.compartment_ocid}"
+  compartment_id = "${var.tenancy_ocid}"
   display_name   = "Default_Security_List"
   vcn_id         = "${oci_core_virtual_network.oke_confluent_vcn.id}"
 
@@ -153,7 +153,7 @@ resource "oci_core_security_list" "default_security_list" {
 }
 
 resource "oci_core_security_list" "LoadBalancers" {
-  compartment_id = "${var.compartment_ocid}"
+  compartment_id = "${var.tenancy_ocid}"
   display_name   = "Load_Balancer_Security_List"
   vcn_id         = "${oci_core_virtual_network.oke_confluent_vcn.id}"
 
@@ -177,7 +177,7 @@ resource "oci_core_subnet" "public" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[count.index],"name")}"
   cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, count.index)}"
   display_name        = "public_${count.index}"
-  compartment_id      = "${var.compartment_ocid}"
+  compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
   route_table_id      = "${oci_core_route_table.RouteForComplete.id}"
   security_list_ids   = ["${oci_core_security_list.default_security_list.id}"]
@@ -190,7 +190,7 @@ resource "oci_core_subnet" "lb_subnet_1" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[0],"name")}"
   cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, 20)}"
   display_name        = "lb_subnet_1"
-  compartment_id      = "${var.compartment_ocid}"
+  compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
   route_table_id      = "${oci_core_route_table.RouteForComplete.id}"
   security_list_ids   = ["${oci_core_security_list.LoadBalancers.id}"]
@@ -203,7 +203,7 @@ resource "oci_core_subnet" "lb_subnet_2" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[1],"name")}"
   cidr_block          = "${cidrsubnet(var.VPC-CIDR, 8, 21)}"
   display_name        = "lb_subnet_2"
-  compartment_id      = "${var.compartment_ocid}"
+  compartment_id      = "${var.tenancy_ocid}"
   vcn_id              = "${oci_core_virtual_network.oke_confluent_vcn.id}"
   route_table_id      = "${oci_core_route_table.RouteForComplete.id}"
   security_list_ids   = ["${oci_core_security_list.LoadBalancers.id}"]
