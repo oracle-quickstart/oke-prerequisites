@@ -28,6 +28,6 @@ variable "oke" {
     name    = "oke"
     version = "v1.9.7"
     shape   = "VM.Standard1.1"
-    nodes_per_subnet   = 1
+    nodes   = 3
   }
 }

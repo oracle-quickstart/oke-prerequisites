@@ -28,6 +28,6 @@ resource "oci_containerengine_node_pool" "node_pool" {
   node_image_name     = "Oracle-Linux-7.5"
   node_shape          = "${var.oke["shape"]}"
   subnet_ids          = ["${oci_core_subnet.subnet.id}"]
-  quantity_per_subnet = "${var.oke["nodes_per_subnet"]}"
+  quantity_per_subnet = "${var.oke["nodes"]}"
   ssh_public_key      = "${var.ssh_public_key}"
 }
