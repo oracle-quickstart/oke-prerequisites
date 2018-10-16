@@ -42,14 +42,38 @@ resource "oci_core_security_list" "security_list" {
   }]
 }
 
-resource "oci_core_subnet" "subnet" {
+resource "oci_core_subnet" "subnet0" {
   display_name        = "subnet"
   compartment_id      = "${var.tenancy_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[0], "name")}"
-  cidr_block          = "10.0.0.0/16"
+  cidr_block          = "10.0.0.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
   route_table_id      = "${oci_core_route_table.route_table.id}"
   security_list_ids   = ["${oci_core_security_list.security_list.id}"]
   dhcp_options_id     = "${oci_core_virtual_network.virtual_network.default_dhcp_options_id}"
-  dns_label           = "oke"
+  dns_label           = "subnet0"
+}
+
+resource "oci_core_subnet" "subnet1" {
+  display_name        = "subnet"
+  compartment_id      = "${var.tenancy_ocid}"
+  availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[1], "name")}"
+  cidr_block          = "10.0.1.0/24"
+  vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
+  route_table_id      = "${oci_core_route_table.route_table.id}"
+  security_list_ids   = ["${oci_core_security_list.security_list.id}"]
+  dhcp_options_id     = "${oci_core_virtual_network.virtual_network.default_dhcp_options_id}"
+  dns_label           = "subnet1"
+}
+
+resource "oci_core_subnet" "subnet2" {
+  display_name        = "subnet"
+  compartment_id      = "${var.tenancy_ocid}"
+  availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[2], "name")}"
+  cidr_block          = "10.0.2.0/24"
+  vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
+  route_table_id      = "${oci_core_route_table.route_table.id}"
+  security_list_ids   = ["${oci_core_security_list.security_list.id}"]
+  dhcp_options_id     = "${oci_core_virtual_network.virtual_network.default_dhcp_options_id}"
+  dns_label           = "subnet2"
 }
