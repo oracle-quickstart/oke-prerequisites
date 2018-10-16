@@ -14,7 +14,6 @@ variable "region" {}
 
 # Key used to SSH to OCI VMs
 variable "ssh_public_key" {}
-
 variable "ssh_private_key" {}
 
 # ---------------------------------------------------------------------------------------------------------------------
