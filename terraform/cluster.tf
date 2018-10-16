@@ -16,7 +16,7 @@ resource "oci_containerengine_cluster" "cluster" {
   vcn_id             = "${oci_core_virtual_network.virtual_network.id}"
 
   options {
-    service_lb_subnet_ids = ["${oci_core_subnet.subnet0.id}", "${oci_core_subnet.subnet1.id}", "${oci_core_subnet.subnet2.id}"]
+    service_lb_subnet_ids = ["${oci_core_subnet.subnet0.id}", "${oci_core_subnet.subnet1.id}"]
   }
 }
 
