@@ -14,9 +14,7 @@ resource "oci_containerengine_cluster" "cluster" {
   kubernetes_version = "${var.oke["version"]}"
   name               = "${var.oke["name"]}"
   vcn_id             = "${oci_core_virtual_network.virtual_network.id}"
-  options {
-    service_lb_subnet_ids = ["${oci_core_subnet.subnet.id}"]
-  }
+  options {}
 }
 
 resource "oci_containerengine_node_pool" "node_pool" {
