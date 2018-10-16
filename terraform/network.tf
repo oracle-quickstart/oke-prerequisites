@@ -42,7 +42,7 @@ resource "oci_core_security_list" "security_list" {
   }]
 }
 
-resource "oci_core_subnet" "subnet0" {
+resource "oci_core_subnet" "subnet" {
   display_name        = "subnet"
   compartment_id      = "${var.tenancy_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[0], "name")}"
@@ -51,29 +51,29 @@ resource "oci_core_subnet" "subnet0" {
   route_table_id      = "${oci_core_route_table.route_table.id}"
   security_list_ids   = ["${oci_core_security_list.security_list.id}"]
   dhcp_options_id     = "${oci_core_virtual_network.virtual_network.default_dhcp_options_id}"
-  dns_label           = "subnet0"
+  dns_label           = "subnet"
 }
 
-resource "oci_core_subnet" "subnet1" {
-  display_name        = "subnet"
+resource "oci_core_subnet" "lb_subnet1" {
+  display_name        = "lb_subnet1"
   compartment_id      = "${var.tenancy_ocid}"
-  availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[1], "name")}"
+  availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[0], "name")}"
   cidr_block          = "10.0.1.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
   route_table_id      = "${oci_core_route_table.route_table.id}"
   security_list_ids   = ["${oci_core_security_list.security_list.id}"]
   dhcp_options_id     = "${oci_core_virtual_network.virtual_network.default_dhcp_options_id}"
-  dns_label           = "subnet1"
+  dns_label           = "lb_subnet1"
 }
 
-resource "oci_core_subnet" "subnet2" {
-  display_name        = "subnet"
+resource "oci_core_subnet" "lb_subnet2" {
+  display_name        = "lb_subnet2"
   compartment_id      = "${var.tenancy_ocid}"
-  availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[2], "name")}"
+  availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[0], "name")}"
   cidr_block          = "10.0.2.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
   route_table_id      = "${oci_core_route_table.route_table.id}"
   security_list_ids   = ["${oci_core_security_list.security_list.id}"]
   dhcp_options_id     = "${oci_core_virtual_network.virtual_network.default_dhcp_options_id}"
-  dns_label           = "subnet2"
+  dns_label           = "lb_subnet2"
 }
