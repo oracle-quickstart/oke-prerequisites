@@ -16,7 +16,7 @@ resource "oci_containerengine_cluster" "cluster" {
   vcn_id             = "${oci_core_virtual_network.virtual_network.id}"
 
   options {
-    service_lb_subnet_ids = ["${oci_core_subnet.lbsubnet1.id}", "${oci_core_subnet.lbsubnet2.id}"]
+    service_lb_subnet_ids = ["${oci_core_subnet.lbsubnet0.id}", "${oci_core_subnet.lbsubnet1.id}"]
   }
 }
 
@@ -27,7 +27,7 @@ resource "oci_containerengine_node_pool" "node_pool" {
   name                = "${var.oke["name"]}"
   node_image_name     = "Oracle-Linux-7.5"
   node_shape          = "${var.oke["shape"]}"
-  subnet_ids          = ["${oci_core_subnet.subnet.id}"]
-  quantity_per_subnet = "${var.oke["nodes"]}"
+  subnet_ids          = ["${oci_core_subnet.subnet0.id}", "${oci_core_subnet.subnet1.id}", "${oci_core_subnet.subnet2.id}"]
+  quantity_per_subnet = "${var.oke["nodes_per_subnet"]}"
   ssh_public_key      = "${var.ssh_public_key}"
 }
