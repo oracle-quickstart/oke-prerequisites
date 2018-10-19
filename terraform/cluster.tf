@@ -10,7 +10,7 @@ resource "local_file" "cluster_kube_config_file" {
 }
 
 resource "oci_containerengine_cluster" "cluster" {
-  compartment_id     = "${var.tenancy_ocid}"
+  compartment_id     = "${var.compartment_ocid}"
   kubernetes_version = "${var.oke["version"]}"
   name               = "${var.oke["name"]}"
   vcn_id             = "${oci_core_virtual_network.virtual_network.id}"
@@ -22,7 +22,7 @@ resource "oci_containerengine_cluster" "cluster" {
 
 resource "oci_containerengine_node_pool" "node_pool" {
   cluster_id          = "${oci_containerengine_cluster.cluster.id}"
-  compartment_id      = "${var.tenancy_ocid}"
+  compartment_id      = "${var.compartment_ocid}"
   kubernetes_version  = "${var.oke["version"]}"
   name                = "${var.oke["name"]}"
   node_image_name     = "Oracle-Linux-7.5"

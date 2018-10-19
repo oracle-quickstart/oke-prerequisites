@@ -1,23 +1,23 @@
 data "oci_identity_availability_domains" "availability_domains" {
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = "${var.compartment_ocid}"
 }
 
 resource "oci_core_virtual_network" "virtual_network" {
   display_name   = "vcn"
   cidr_block     = "10.0.0.0/16"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = "${var.compartment_ocid}"
   dns_label      = "oke"
 }
 
 resource "oci_core_internet_gateway" "internet_gateway" {
   display_name   = "internet_gateway"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = "${var.compartment_ocid}"
   vcn_id         = "${oci_core_virtual_network.virtual_network.id}"
 }
 
 resource "oci_core_route_table" "route_table" {
   display_name   = "route_table"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = "${var.compartment_ocid}"
   vcn_id         = "${oci_core_virtual_network.virtual_network.id}"
 
   route_rules {
@@ -28,7 +28,7 @@ resource "oci_core_route_table" "route_table" {
 
 resource "oci_core_security_list" "security_list" {
   display_name   = "security_list"
-  compartment_id = "${var.tenancy_ocid}"
+  compartment_id = "${var.compartment_ocid}"
   vcn_id         = "${oci_core_virtual_network.virtual_network.id}"
 
   egress_security_rules = [{
@@ -45,7 +45,7 @@ resource "oci_core_security_list" "security_list" {
 
 resource "oci_core_subnet" "subnet0" {
   display_name        = "subnet0"
-  compartment_id      = "${var.tenancy_ocid}"
+  compartment_id      = "${var.compartment_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[0], "name")}"
   cidr_block          = "10.0.0.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
@@ -57,7 +57,7 @@ resource "oci_core_subnet" "subnet0" {
 
 resource "oci_core_subnet" "subnet1" {
   display_name        = "subnet1"
-  compartment_id      = "${var.tenancy_ocid}"
+  compartment_id      = "${var.compartment_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[1], "name")}"
   cidr_block          = "10.0.1.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
@@ -69,7 +69,7 @@ resource "oci_core_subnet" "subnet1" {
 
 resource "oci_core_subnet" "subnet2" {
   display_name        = "subnet2"
-  compartment_id      = "${var.tenancy_ocid}"
+  compartment_id      = "${var.compartment_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[2], "name")}"
   cidr_block          = "10.0.2.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
@@ -81,7 +81,7 @@ resource "oci_core_subnet" "subnet2" {
 
 resource "oci_core_subnet" "lbsubnet0" {
   display_name        = "lbsubnet0"
-  compartment_id      = "${var.tenancy_ocid}"
+  compartment_id      = "${var.compartment_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[0], "name")}"
   cidr_block          = "10.0.3.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
@@ -93,7 +93,7 @@ resource "oci_core_subnet" "lbsubnet0" {
 
 resource "oci_core_subnet" "lbsubnet1" {
   display_name        = "lbsubnet1"
-  compartment_id      = "${var.tenancy_ocid}"
+  compartment_id      = "${var.compartment_ocid}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.availability_domains.availability_domains[1], "name")}"
   cidr_block          = "10.0.4.0/24"
   vcn_id              = "${oci_core_virtual_network.virtual_network.id}"
