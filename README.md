@@ -77,6 +77,15 @@ That should give something like:
 
 ![](./images/09%20-%20get%20nodes.png)
 
+## Make yourself Admin
+You probably want your `kubectl` set up so that you're a cluster admin.  Otherwise your access to your new cluster will be limited.  There are some instructions on that [here](https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengaboutaccesscontrol.htm).  You'll need to grab your user OCID (possibly from the console, [here](https://console.us-phoenix-1.oraclecloud.com/a/identity/users)) and then run a command like:
+
+    kubectl create clusterrolebinding myadmin --clusterrole=cluster-admin --user=ocid1.user.oc1..aaaaa...zutq
+
+That gives this:
+
+![](./images/10%20-%20admin.png)
+
 ## Destroy the Deployment
 When you no longer need the OKE cluster, you can run this to delete the deployment:
 
@@ -84,4 +93,4 @@ When you no longer need the OKE cluster, you can run this to delete the deployme
 
 You'll need to enter `yes` when prompted.  Once complete, you'll see something like this:
 
-![](./images/10%20-%20terraform%20destroy.png)
+![](./images/11%20-%20terraform%20destroy.png)
