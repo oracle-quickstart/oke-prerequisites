@@ -8,6 +8,7 @@ variable "compartment_ocid" {}
 
 # Required by the OCI Provider
 variable "tenancy_ocid" {}
+
 variable "user_ocid" {}
 variable "fingerprint" {}
 variable "private_key_path" {}
@@ -15,6 +16,7 @@ variable "region" {}
 
 # Key used to SSH to OCI VMs
 variable "ssh_public_key" {}
+
 variable "ssh_private_key" {}
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -27,7 +29,6 @@ variable "oke" {
 
   default = {
     name             = "oke"
-    version          = "v1.11.5"
     shape            = "VM.Standard2.2"
     nodes_per_subnet = 1
   }

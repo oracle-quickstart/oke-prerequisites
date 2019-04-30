@@ -11,7 +11,7 @@ resource "local_file" "cluster_kube_config_file" {
 
 resource "oci_containerengine_cluster" "cluster" {
   compartment_id     = "${var.compartment_ocid}"
-  kubernetes_version = "${var.oke["version"]}"
+  kubernetes_version = "${data.oci_containerengine_cluster_option.test_cluster_option.kubernetes_versions.0}"
   name               = "${var.oke["name"]}"
   vcn_id             = "${oci_core_virtual_network.virtual_network.id}"
 
