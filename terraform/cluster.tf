@@ -25,7 +25,7 @@ resource "oci_containerengine_node_pool" "node_pool" {
   compartment_id      = "${var.compartment_ocid}"
   kubernetes_version  = "${var.oke["version"]}"
   name                = "${var.oke["name"]}"
-  node_image_name     = "Oracle-Linux-7.5"
+  node_image_name     = "Oracle-Linux-7.6"
   node_shape          = "${var.oke["shape"]}"
   subnet_ids          = ["${oci_core_subnet.subnet0.id}", "${oci_core_subnet.subnet1.id}", "${oci_core_subnet.subnet2.id}"]
   quantity_per_subnet = "${var.oke["nodes_per_subnet"]}"
