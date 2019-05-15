@@ -1,14 +1,14 @@
-# oke-how-to
-These are instructions on how to setup an Oracle Kubernetes Engine (OKE) cluster along with a Terraform module to automate part of that process.
+# oke-quickstart-prerequisites
+These are instructions on how to setup an Oracle Kubernetes Engine (OKE) cluster along with a Terraform module to automate part of that process for use with the Oracle Cloud Infrastructure Quick Start examples.
 
 ## Prerequisites
-First off you'll need to do some pre deploy setup.  That's all detailed [here](https://github.com/cloud-partners/oci-prerequisites).
+First off you'll need to do some pre deploy setup.  That's all detailed [here](https://github.com/oracle/oci-quickstart-prerequisites).
 
 ## Clone the Module
 Now, you'll want a local copy of this repo.  You can make that with the commands:
 
-    git clone https://github.com/cloud-partners/oke-how-to.git
-    cd oke-how-to/terraform
+    git clone https://github.com/oracle/oke-quickstart-prerequisites.git
+    cd oke-quickstart-prerequisites/terraform
     ls
 
 ![](./images/01%20-%20git%20clone.png)
