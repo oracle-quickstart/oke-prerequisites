@@ -1,5 +1,5 @@
 # oke-quickstart-prerequisites
-These are instructions on how to setup an Oracle Kubernetes Engine (OKE) cluster along with a Terraform module to automate part of that process for use with the Oracle Cloud Infrastructure Quick Start examples.
+These are instructions on how to setup an Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) cluster along with a Terraform module to automate part of that process for use with the Oracle Cloud Infrastructure Quick Start examples.
 
 ## Prerequisites
 First off you'll need to do some pre deploy setup.  That's all detailed [here](https://github.com/oracle/oci-quickstart-prerequisites).
@@ -64,7 +64,7 @@ That gave me this:
 
 ![](./images/08%20-%20brew%20install%20helm.png)
 
-The terraform apply dumped a kubernetes config file called config.  By default, `kubectl` expects the config file to be in `~/.kube/config`.  So, we can put it there by running:
+The terraform apply dumped a Kubernetes config file called config.  By default, `kubectl` expects the config file to be in `~/.kube/config`.  So, we can put it there by running:
 
     mkdir ~/.kube
     mv config ~/.kube
