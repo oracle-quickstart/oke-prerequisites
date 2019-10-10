@@ -1,4 +1,4 @@
-# oke-quickstart-prerequisites
+# oke-prerequisites
 These are instructions on how to setup an Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) cluster along with a Terraform module to automate part of that process for use with the Oracle Cloud Infrastructure Quick Start examples.
 
 ## Prerequisites
